@@ -1,0 +1,30 @@
+{
+    "version": "0.0.4",
+    "name": "verloning/laravel-ledger",
+    "description": "Simple ledger package",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Vincent Swarte",
+            "email": "vincent@moodles.nl"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "require": {
+        "moneyphp/money": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ledger\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ledger\\LedgerServiceProvider"
+            ]
+        }
+    }
+}
