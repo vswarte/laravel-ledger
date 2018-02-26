@@ -23,7 +23,7 @@ class LedgerAccount extends Model
     protected function createTransaction(Money $amount, string $debcred, string $description)
     {
         $mutation = new LedgerMutation([
-            'debcred'  => LedgerMutation::CREDIT,
+            'debcred'  => $debcred,
             'amount'   => $amount,
             'currency' => 'EUR',
         ]);
