@@ -20,7 +20,7 @@ class LedgerAccount extends Model
         return $this->hasMany(LedgerMutation::class);
     }
 
-    public function credit(Money $amount, string $description = '')
+    protected function createTransaction(Money $amount, string $debcred, string $description)
     {
         $mutation = new LedgerMutation([
             'debcred'  => LedgerMutation::CREDIT,
@@ -36,7 +36,25 @@ class LedgerAccount extends Model
 
         $transaction->mutations()->save($mutation);
 
-        return $result;
+        return $transaction;
+    }
+
+    public function credit(Money $amount, string $description = '')
+    {
+        return $this->createTransaction(
+            $amount,
+            $description,
+            LedgerMutation::CREDIT
+        );
+    }
+
+    public function debit(Money $amount, string $description = '')
+    {
+        return $this->createTransaction(
+            $amount,
+            $description,
+            LedgerMutation::DEBIT
+        );
     }
 
     /**
