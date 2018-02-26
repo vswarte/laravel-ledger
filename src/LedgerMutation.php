@@ -3,6 +3,7 @@
 namespace Ledger;
 
 use Money\Money;
+use Money\Currency;
 use Illuminate\Database\Eloquent\Model;
 
 class LedgerMutation extends Model
@@ -11,7 +12,7 @@ class LedgerMutation extends Model
     const CREDIT = 'C';
 
     protected $fillable = [
-        'debcred', 'amount', 'account_id'
+        'debcred', 'amount', 'account_id', 'currency',
     ];
 
     public function account()
@@ -21,14 +22,20 @@ class LedgerMutation extends Model
 
     public function getAmountAttribute($value)
     {
-        return Money::EUR($value);
+        return Money($value, new Currency($this->currency));
     }
 
     public function setAmountAttribute($value)
     {
-        if ($value instanceof Money)
+        // if we get passed in an instance of a Money object, grab the
+        // cent value as well as the currency. 
+        if ($value instanceof Money) {
             $value = $value->getAmount();
+            $currency = $value->getCurrency()->getCode();
 
-        $this->attributes['amount'] = $value;
+            $this->attributes['currency'] = $currency;
+        }
+
+        $this->attributes['amount']   = $value;
     }
 }
