@@ -15,11 +15,11 @@ class CreateLedgerMutationsTable extends Migration
     {
         Schema::create('ledger_mutations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('account_id')
+            $table->unsignedInteger('ledger_account_id')
                 ->references('id')
                 ->on('ledger_accounts');
 
-            $table->unsignedInteger('transaction_id')
+            $table->unsignedInteger('ledger_transaction_id')
                 ->references('id')
                 ->on('ledger_transactions');
 
