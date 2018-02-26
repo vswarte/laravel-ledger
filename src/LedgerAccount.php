@@ -43,8 +43,8 @@ class LedgerAccount extends Model
     {
         return $this->createTransaction(
             $amount,
-            $description,
-            LedgerMutation::CREDIT
+            LedgerMutation::CREDIT,
+            $description
         );
     }
 
@@ -52,8 +52,8 @@ class LedgerAccount extends Model
     {
         return $this->createTransaction(
             $amount,
-            $description,
-            LedgerMutation::DEBIT
+            LedgerMutation::DEBIT,
+            $description
         );
     }
 
