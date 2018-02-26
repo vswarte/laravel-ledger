@@ -30,8 +30,8 @@ class LedgerMutation extends Model
         // if we get passed in an instance of a Money object, grab the
         // cent value as well as the currency. 
         if ($value instanceof Money) {
-            $value = $value->getAmount();
             $currency = $value->getCurrency()->getCode();
+            $value = $value->getAmount();
 
             $this->attributes['currency'] = $currency;
         }
