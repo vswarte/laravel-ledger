@@ -30,10 +30,10 @@ class TransactionFactory
         string $description = ''
     ) {
         $mutation = new LedgerMutation([
-            'account'  => $account,
-            'debcred'  => LedgerMutation::CREDIT,
-            'amount'   => $amount,
-            'currency' => $amount->getCurrency()->getCode(),
+            'account_id' => $account->id,
+            'debcred'    => LedgerMutation::CREDIT,
+            'amount'     => $amount,
+            'currency'   => $amount->getCurrency()->getCode(),
         ]);
 
         return self::createTransaction([$mutation], $description);
@@ -45,10 +45,10 @@ class TransactionFactory
         string $description = ''
     ) {
         $mutation = new LedgerMutation([
-            'account'  => $account,
-            'debcred'  => LedgerMutation::DEBIT,
-            'amount'   => $amount,
-            'currency' => $amount->getCurrency()->getCode(),
+            'account_id' => $account->id,
+            'debcred'    => LedgerMutation::DEBIT,
+            'amount'     => $amount,
+            'currency'   => $amount->getCurrency()->getCode(),
         ]);
 
         return self::createTransaction([$mutation], $description);
