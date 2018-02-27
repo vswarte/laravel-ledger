@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionFactory
 {
-    public function createTransaction(array $mutations, string $description)
-    {
+    public static function createTransaction(
+        array $mutations,
+        string $description
+    ) {
         DB::transaction(function () {
             foreach ($mutations as $mutation) {
                 $mutation->account_id = $mutation->account->id;
@@ -21,7 +23,7 @@ class TransactionFactory
         }, 5);
     }
 
-    public function credit(
+    public static function credit(
         LedgerAccount $account,
         Money $amount,
         string $description = ''
@@ -36,7 +38,7 @@ class TransactionFactory
         return $this->createTransaction([$mutation], $description);
     }
 
-    public function debit(
+    public static function debit(
         LedgerAccount $account,
         Money $amount,
         string $description = ''
