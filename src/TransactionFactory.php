@@ -12,15 +12,11 @@ class TransactionFactory
         string $description
     ) {
         DB::transaction(function () use ($mutations, $description) {
-            foreach ($mutations as $mutation) {
-                $mutation->account_id = $mutation->account->id;
-            }
-
             $transaction = LedgerTransaction::create([
                 'description' => $description,
             ])->fresh();
 
-            $transaction->mutations()->save($mutations);
+            $transaction->mutations()->saveMany($mutations);
         }, 5);
     }
 
