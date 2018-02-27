@@ -50,4 +50,26 @@ class TransactionFactory
         return self::createTransaction([$mutation], $description);
     }
 
+    public static function transfer(
+        LedgerAccount $from,
+        LedgerAccount $to,
+        Money $amount ,
+        string $description = ''
+    ) {
+        $debit = new LedgerMutation([
+            'ledger_account_id' => $from->id,
+            'debcred'           => LedgerMutation::DEBIT,
+            'amount'            => $amount,
+            'currency'          => $amount->getCurrency()->getCode(),
+        ]);
+
+        $credit = new LedgerMutation([
+            'ledger_account_id' => $to->id,
+            'debcred'           => LedgerMutation::CREDIT,
+            'amount'            => $amount,
+            'currency'          => $amount->getCurrency()->getCode(),
+        ]);
+
+        return self::createTransaction([$debit, $credit], $description);
+    }
 }
