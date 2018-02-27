@@ -2,6 +2,7 @@
 
 namespace Ledger;
 
+use Money\Money;
 use Illuminate\Support\Facades\DB;
 
 class TransactionFactory
