@@ -26,6 +26,9 @@ class CreateLedgerMutationsTable extends Migration
             $table->char('debcred', 1);
             $table->unsignedInteger('amount');
             $table->string('currency');
+
+            $table->string('description')->nullable();
+
             $table->timestamps();
         });
     }

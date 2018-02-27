@@ -12,7 +12,7 @@ class LedgerMutation extends Model
     const CREDIT = 'C';
 
     protected $fillable = [
-        'debcred', 'amount', 'account_id', 'currency',
+        'debcred', 'amount', 'account_id', 'currency', 'description'
     ];
 
     public function account()
