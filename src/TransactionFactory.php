@@ -36,7 +36,7 @@ class TransactionFactory
             'currency' => $amount->getCurrency()->getCode(),
         ]);
 
-        return $this->createTransaction([$mutation], $description);
+        return self::createTransaction([$mutation], $description);
     }
 
     public static function debit(
@@ -51,7 +51,7 @@ class TransactionFactory
             'currency' => $amount->getCurrency()->getCode(),
         ]);
 
-        return $this->createTransaction([$mutation], $description);
+        return self::createTransaction([$mutation], $description);
     }
 
 }
