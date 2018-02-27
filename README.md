@@ -52,6 +52,45 @@ The first parameter singifies the name of the account, this must be
 unique in the scope of the `Accountable` as you'll be using it as an
 identifier. The second parameter is simply a description.
 
+### Creating a transaction
+
+There are several types of transactions, simple withdrawals to 
+transfers. Transactions are simply a way of grouping mutations.
+This way you can set up a transaction that operates on multiple 
+accounts easily.
+
+#### Simple credit/debit
+
+We just want to take/add some money from/to an account.
+
+```
+use Ledger\TransactionFactory;
+
+// 5 euro
+$amount  = new Money::EUR(500);
+$account = User::find(1)->account('groceries');
+TransactionFactory::debit($account, $amount, 'bought some vegetables');
+```
+
+#### Transfers
+
+In some cases, we want to take money from one account, and put it in 
+a different account (be it paying for something or allocating savings).
+
+```
+use Ledger\TransactionFactory;
+
+$amount = new Money::EUR(500);
+$from   = User::find(1)->account('salary');
+$to     = User::find(1)->account('car');
+TransactionFactory::transfer(
+    $from,
+    $to,
+    $amount,
+    'monthly savings'
+);
+```
+
 ### Fetching account balance
 
 An account is not very useful without being able to query its balance.
@@ -60,3 +99,5 @@ sum of the debit transactions subtracted.
 ```php
 User::find(1)->account('groceries')->balance();
 ```
+
+
