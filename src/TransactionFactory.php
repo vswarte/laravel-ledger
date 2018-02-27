@@ -11,7 +11,7 @@ class TransactionFactory
         array $mutations,
         string $description
     ) {
-        DB::transaction(function () {
+        DB::transaction(function () use ($mutations, $description) {
             foreach ($mutations as $mutation) {
                 $mutation->account_id = $mutation->account->id;
             }
