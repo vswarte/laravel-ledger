@@ -4,7 +4,6 @@ namespace Ledger;
 
 use Money\Money;
 use Money\Currency;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class LedgerAccount extends Model
@@ -19,43 +18,6 @@ class LedgerAccount extends Model
     public function mutations()
     {
         return $this->hasMany(LedgerMutation::class);
-    }
-
-    protected function createTransaction(Money $amount, string $debcred, string $description)
-    {
-        DB::transaction(function () {
-            $mutation = new LedgerMutation([
-                'debcred'  => $debcred,
-                'amount'   => $amount,
-                'currency' => 'EUR',
-            ]);
-
-            $mutation->account()->associate($this);
-
-            $transaction = LedgerTransaction::create([
-                'description' => $description,
-            ])->fresh();
-
-            $transaction->mutations()->save($mutation);
-        }, 5);
-    }
-
-    public function credit(Money $amount, string $description = '')
-    {
-        return $this->createTransaction(
-            $amount,
-            LedgerMutation::CREDIT,
-            $description
-        );
-    }
-
-    public function debit(Money $amount, string $description = '')
-    {
-        return $this->createTransaction(
-            $amount,
-            LedgerMutation::DEBIT,
-            $description
-        );
     }
 
     /**
