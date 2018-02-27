@@ -8,7 +8,7 @@ This package assums you work with EUR as your base currency.
 First off you'll need to add the `Accountable` trait to the Eloquent
 models you want to start tracking transactions for.
 
-```php
+```
 use Ledger\Accountable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,7 +44,7 @@ performed on these accounts. A single accountable can have multiple
 accounts.
 You can create an account for a singular user like this:
 
-```php
+```
 User::find(1)->createAccount('groceries', 'Day-to-day groceries');
 ```
 
@@ -96,8 +96,6 @@ TransactionFactory::transfer(
 An account is not very useful without being able to query its balance.
 The balance itself is simply the sum of all credit mutations with the 
 sum of the debit transactions subtracted.
-```php
+```
 User::find(1)->account('groceries')->balance();
 ```
-
-
