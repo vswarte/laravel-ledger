@@ -1,7 +1,6 @@
 # Laravel Ledger
 
 Simple package to keep a track of monetary transactions.
-This package assums you work with EUR as your base currency.
 
 ## Usage
 
