@@ -1,6 +1,6 @@
 {
     "version": "0.0.4",
-    "name": "verloning/laravel-ledger",
+    "name": "vswarte/laravel-ledger",
     "description": "Simple ledger package",
     "type": "library",
     "authors": [
