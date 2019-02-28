@@ -16,9 +16,11 @@ trait Accountable
 
     public function createAccount(string $name, string $description)
     {
-        return $this->accounts()->save([
+        $account = new LedgerAccount([
             'name'        => $name,
             'description' => $description,
         ]);
+
+        return $this->accounts()->save($account);
     }
 }
