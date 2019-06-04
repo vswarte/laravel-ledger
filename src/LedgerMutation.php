@@ -20,6 +20,11 @@ class LedgerMutation extends Model
         return $this->belongsTo(LedgerAccount::class, 'ledger_account_id');
     }
 
+    public function transaction()
+    {
+        return $this->belongsTo(LedgerTransaction::class, 'ledger_transaction_id');
+    }
+
     public function getAmountAttribute($value)
     {
         return Money($value, new Currency($this->currency));
