@@ -22,7 +22,7 @@ class LedgerMutation extends Model
 
     public function getAmountAttribute($value)
     {
-        return Money($value, new Currency($this->currency));
+        return new Money($value, new Currency($this->currency));
     }
 
     public function setAmountAttribute($value)
