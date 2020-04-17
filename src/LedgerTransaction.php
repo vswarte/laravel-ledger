@@ -11,6 +11,6 @@ class LedgerTransaction extends Model
 
     public function mutations()
     {
-        return $this->hasMany(LedgerTransaction::class, 'ledger_transaction_id');
+        return $this->hasMany(LedgerMutation::class, 'ledger_transaction_id');
     }
 }
